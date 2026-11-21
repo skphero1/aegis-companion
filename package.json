@@ -1,0 +1,1 @@
+{"description":"Windows & Cross-Platform Companion App — File Scanner & Quarantine Shell","devDependencies":{"electron":"^45.3.4"},"main":"main.js","name":"aegis-companion","scripts":{"start":"electron ."},"version":"0.1.0"}

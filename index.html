@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aegis Companion — Endpoint Scanner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Custom Frameless Titlebar Drag Strip -->
+  <header class="titlebar">
+    <div class="titlebar-brand">
+      <span class="brand-dot"></span>
+      <span>AEGIS COMPANION</span>
+      <span class="shell-pill">STARTER SHELL</span>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="shield-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">Aegis Guard</div>
+          <div class="brand-sub">Desktop Companion</div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-view="home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          </svg>
+          <span>Home</span>
+        </button>
+
+        <button class="nav-item" data-view="scan">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <span>File Scanner</span>
+        </button>
+
+        <button class="nav-item" data-view="quarantine">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>Quarantine</span>
+          <span class="nav-badge" id="nav-quarantine-count">0</span>
+        </button>
+      </nav>
+
+      <div class="extension-bridge-card">
+        <div class="bridge-header">
+          <span class="pulse-teal"></span>
+          <span>Browser Extension Sync</span>
+        </div>
+        <p class="bridge-desc">UI System v1 • Native Messaging Bridge Ready (Placeholder)</p>
+      </div>
+    </aside>
+
+    <!-- Main Content Viewport -->
+    <main class="viewport">
+      <!-- ================= VIEW 1: HOME ================= -->
+      <section id="view-home" class="view active">
+        <div class="hero-card" id="protection-hero">
+          <div class="hero-left">
+            <div class="status-ring" id="status-ring">
+              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <div>
+              <div class="status-eyebrow">COMPANION SHIELD STATUS</div>
+              <h1 id="status-headline">Real-Time Guard Active</h1>
+              <p id="status-subtext">Extension download handoff &amp; local folder inspection ready.</p>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <label class="toggle-switch" title="Toggle Placeholder Guard State">
+              <input type="checkbox" id="protection-toggle" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="cta-banner">
+          <div>
+            <h2>On-Demand Folder Scan</h2>
+            <p>Inspect downloaded archives, scripts, and executables against extension &amp; hash rules.</p>
+          </div>
+          <button class="btn-primary-xl" id="home-scan-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <span>Scan Folder</span>
+          </button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">Last Scan</span>
+            <strong class="stat-value" id="stat-last-scan">Never scanned</strong>
+            <span class="stat-meta" id="stat-last-folder">Select a folder to begin</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Last Scan Coverage</span>
+            <strong class="stat-value" id="stat-files-checked">0 files</strong>
+            <span class="stat-meta" id="stat-flagged-summary">0 flagged items</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Isolated in Quarantine</span>
+            <strong class="stat-value teal-text" id="stat-quarantine-total">0 items</strong>
+            <span class="stat-meta">Stored safely in local vault</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 2: SCANNER ================= -->
+      <section id="view-scan" class="view">
+        <div class="view-header">
+          <div>
+            <h1>Folder Scanner</h1>
+            <p class="subtitle">Placeholder heuristic engine (extension check + SHA-256 bad hash list)</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn-secondary" id="btn-rescan" disabled>Re-Scan</button>
+            <button class="btn-primary" id="btn-pick-folder">Pick Folder &amp; Scan</button>
+          </div>
+        </div>
+
+        <div class="scan-bar">
+          <div class="folder-pill">
+            <span class="pill-label">TARGET:</span>
+            <code id="scan-target-path">No folder selected</code>
+          </div>
+          <label class="filter-check">
+            <input type="checkbox" id="filter-flagged-only" />
+            <span>Flagged only</span>
+          </label>
+        </div>
+
+        <div class="summary-strip" id="scan-summary-strip" hidden>
+          <span>Scanned: <strong id="sum-total">0</strong></span>
+          <span class="teal-text">Clean: <strong id="sum-clean">0</strong></span>
+          <span class="danger-text">Flagged: <strong id="sum-flagged">0</strong></span>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>SHA-256 (Prefix)</th>
+                <th>Detection Status</th>
+                <th class="align-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="scan-results-body">
+              <tr>
+                <td colspan="4" class="empty-cell">
+                  Click <strong>Pick Folder &amp; Scan</strong> to inspect local files.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 3: QUARANTINE ================= -->
+      <section id="view-quarantine" class="view">
+        <div class="view-header">
+          <div>
+            <h1>Quarantine Vault</h1>
+            <p class="subtitle">Isolated files are renamed (<code>.quarantined</code>) and neutralized in app storage.</p>
+          </div>
+          <button class="btn-secondary" id="btn-refresh-quarantine">Refresh</button>
+        </div>
+
+        <div class="scan-bar">
+          <div class="folder-pill">
+            <span class="pill-label">VAULT PATH:</span>
+            <code id="vault-path-display">Loading...</code>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Original File</th>
+                <th>Trigger Reason</th>
+                <th>Quarantined</th>
+                <th class="align-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="quarantine-body">
+              <tr>
+                <td colspan="4" class="empty-cell">No files currently in quarantine.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>
